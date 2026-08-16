@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal do Aluno · Ambiente de Demonstração</title>
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons (Deferred for LCP optimization) -->
+    <link rel="preconnect" href="https://unpkg.com">
+    <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
+    
+    <!-- Salesforce Pre-warming -->
+    <link rel="preconnect" href="https://orgfarm-138e8f6c88-dev-ed.develop.my.site.com">
+    <link rel="preload" href="https://orgfarm-138e8f6c88-dev-ed.develop.my.site.com/ESWVitruMessaging1786832319273/assets/js/bootstrap.min.js" as="script">
+    
+    <!-- Custom CSS -->
+    <link rel="preload" as="style" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        
+        <!-- MENU LATERAL -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="ph ph-graduation-cap logo-icon"></i>
+                <h2>EduPortal</h2>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active">
+                    <i class="ph ph-squares-four"></i>
+                    <span>Início</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="ph ph-books"></i>
+                    <span>Minhas Disciplinas</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="ph ph-map-trifold"></i>
+                    <span>Trilha de Aprendizagem</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="ph ph-calendar-blank"></i>
+                    <span>Calendário</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="ph ph-rocket-launch"></i>
+                    <span>Espaço Calouro</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="ph ph-info"></i>
+                    <span>Conheça EAD</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="ph ph-credit-card"></i>
+                    <span>Financeiro</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="demo-badge-sidebar">
+                    <i class="ph ph-flask"></i>
+                    <span>Modo Demo</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="main-content">
+            
+            <!-- TOPO (HEADER) -->
+            <header class="top-header">
+                <div class="header-title">
+                    <h1>Portal do Aluno</h1>
+                    <span class="subtitle">Ambiente de Demonstração</span>
+                </div>
+                
+                <div class="header-right">
+                    <div class="demo-badge">
+                        <i class="ph-fill ph-warning-circle"></i>
+                        Demonstração — dados fictícios
+                    </div>
+                    
+                    <div class="user-profile">
+                        <div class="avatar">
+                            <span>JS</span>
+                        </div>
+                        <div class="user-info">
+                            <span class="greeting">Olá, João Silva</span>
+                            <span class="course">Análise e Desenvolvimento de Sistemas</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- DASHBOARD CENTRAL -->
+            <div class="dashboard">
+                
+                <!-- CARD: AMBIENTAÇÃO -->
+                <section class="card ambientacao-card">
+                    <div class="card-header">
+                        <div class="card-title-group">
+                            <div class="icon-wrapper">
+                                <i class="ph ph-target"></i>
+                            </div>
+                            <h3>Seu Progresso de Ambientação</h3>
+                        </div>
+                        <span class="progress-text">40% concluído</span>
+                    </div>
+                    
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: 40%;"></div>
+                    </div>
+                    
+                    <ul class="checklist">
+                        <li class="check-item completed">
+                            <i class="ph-fill ph-check-circle"></i>
+                            <span>Primeiro acesso concluído</span>
+                        </li>
+                        <li class="check-item pending">
+                            <i class="ph ph-hourglass"></i>
+                            <span>Conheça seu ambiente virtual</span>
+                        </li>
+                        <li class="check-item pending">
+                            <i class="ph ph-hourglass"></i>
+                            <span>Configure suas notificações</span>
+                        </li>
+                        <li class="check-item pending">
+                            <i class="ph ph-hourglass"></i>
+                            <span>Conheça seus canais de apoio</span>
+                        </li>
+                    </ul>
+
+                    <div class="ambientacao-footer-text">
+                        <i class="ph-fill ph-info"></i>
+                        <p>Alunos que concluem a ambientação tendem a se adaptar melhor à rotina de estudos EAD.</p>
+                    </div>
+                </section>
+
+                <div class="dashboard-grid">
+                    <!-- CARD: PRÓXIMA ATIVIDADE -->
+                    <section class="card atividade-card">
+                        <div class="card-header">
+                            <h3>Próxima Atividade</h3>
+                            <div class="badge-urgent">Para fazer</div>
+                        </div>
+                        <div class="atividade-content">
+                            <h4 class="atividade-title">Atividade 1 — Diagnóstica</h4>
+                            <p class="atividade-subject">Introdução ao EAD</p>
+                            
+                            <div class="deadline">
+                                <i class="ph ph-clock"></i>
+                                <span>Prazo: <strong>22/08/2026</strong></span>
+                            </div>
+                        </div>
+                        <button class="btn-primary">
+                            Acessar atividade
+                            <i class="ph ph-arrow-right"></i>
+                        </button>
+                    </section>
+
+                    <!-- CARD: CONTINUE DE ONDE PAROU -->
+                    <section class="card resume-card">
+                        <div class="card-header">
+                            <h3>Continue de onde parou</h3>
+                        </div>
+                        <div class="resume-content">
+                            <div class="resume-icon">
+                                <i class="ph ph-monitor-play"></i>
+                            </div>
+                            <div class="resume-details">
+                                <span class="resume-label">Último acesso</span>
+                                <h4 class="resume-title">Introdução ao EAD</h4>
+                                <p class="resume-module">Módulo 1: Conhecendo a plataforma</p>
+                            </div>
+                        </div>
+                        <button class="btn-secondary">
+                            Retomar estudos
+                        </button>
+                    </section>
+                </div>
+            </div>
+
+            <!-- RODAPÉ -->
+            <footer class="footer">
+                <p>Ambiente de demonstração · Hackathon Vitru 2026</p>
+            </footer>
+            
+        </main>
+    </div>
+
+    <!-- INÍCIO ÁREA AGENTFORCE -->
+    <script type='text/javascript'>
+        function initEmbeddedMessaging() {
+            try {
+                embeddedservice_bootstrap.settings.language = 'pt_BR';
+
+                embeddedservice_bootstrap.init(
+                    '00Dfj00000arKK2',
+                    'Vitru_Messaging',
+                    'https://orgfarm-138e8f6c88-dev-ed.develop.my.site.com/ESWVitruMessaging1786832319273',
+                    {
+                        scrt2URL: 'https://orgfarm-138e8f6c88-dev-ed.develop.my.salesforce-scrt.com'
+                    }
+                );
+            } catch (err) {
+                console.error('Error loading Embedded Messaging: ', err);
+                window.__agentforceLoadError = true;
+                window.dispatchEvent(new Event('agentforce-load-error'));
+            }
+        };
+    </script>
+    <script type='text/javascript' src='https://orgfarm-138e8f6c88-dev-ed.develop.my.site.com/ESWVitruMessaging1786832319273/assets/js/bootstrap.min.js' defer
+        onload='initEmbeddedMessaging()'
+        onerror='window.__agentforceLoadError = true; window.dispatchEvent(new Event("agentforce-load-error"));'>
+    </script>
+    
+    <!-- O código abaixo é um fallback estático para demonstração offline -->
+    
+    <div class="chat-widget-container">
+        
+        <!-- Banner de Contexto / Recomendação -->
+        <div class="context-banner" id="contextBanner">
+            <div class="context-banner-header">
+                <i class="ph-fill ph-sparkle"></i>
+                <h5>Recomendação de Sucesso</h5>
+                <button class="btn-close-banner" id="btnCloseBanner"><i class="ph ph-x"></i></button>
+            </div>
+            <div class="context-banner-body">
+                <p>Percebemos que você ainda não concluiu algumas etapas iniciais importantes. Nosso assistente pode ajudar você a finalizar sua ambientação.</p>
+                <button class="btn-action-banner" id="btnActionBanner">Falar com Assistente</button>
+            </div>
+        </div>
+
+        <!-- Janela de Chat (Fechada por padrão) -->
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <div class="chat-avatar">
+                        <i class="ph-fill ph-robot"></i>
+                    </div>
+                    <div>
+                        <h4>Sucesso do Aluno</h4>
+                        <span>Agente Virtual Inteligente</span>
+                    </div>
+                </div>
+                <button class="btn-close-chat" id="btnCloseChat">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message system-msg">
+                    Chat iniciado (Modo Offline Demo)
+                </div>
+                <div class="message bot-msg">
+                    <p>Olá João! Vejo que você já realizou seu primeiro acesso.</p>
+                </div>
+                <div class="message bot-msg delayed-msg">
+                    <p>Ainda faltam algumas etapas para concluir sua ambientação. Posso ajudar?</p>
+                </div>
+                
+                <div class="chat-options delayed-options">
+                    <button class="chat-option-btn" data-reply="Quais são os próximos passos?">Ver próximos passos</button>
+                    <button class="chat-option-btn" data-reply="Onde encontro minha atividade?">Encontrar minha atividade</button>
+                    <button class="chat-option-btn" data-reply="Preciso falar com meu polo.">Falar com o polo</button>
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chatInputFallback" placeholder="Digite sua mensagem...">
+                <button class="btn-send" id="btnSendFallback"><i class="ph-fill ph-paper-plane-right"></i></button>
+            </div>
+            <div class="chat-footer">
+                <span>⚡ Integrado com Agentforce (Fallback)</span>
+            </div>
+        </div>
+
+        <!-- Botão Flutuante -->
+        <button class="chat-fab" id="btnOpenChat">
+            <i class="ph-fill ph-chat-teardrop-text"></i>
+            <span class="tooltip">Fale com o Sucesso do Aluno</span>
+        </button>
+    </div>
+    <!-- FIM ÁREA AGENTFORCE -->
+
+    <!-- Scripts -->
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
