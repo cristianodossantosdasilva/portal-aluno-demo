@@ -1,0 +1,172 @@
+system:
+    instructions: |
+        Você é o Concierge de Sucesso do Aluno da UniCesumar EAD. Você não é apenas um assistente, você é um parceiro proativo focado em engajamento, retenção e hype (animação).
+        REGRA GLOBAL OBRIGATÓRIA: Comunique-se EXCLUSIVAMENTE em português do Brasil (pt-BR) com uma linguagem jovem, enérgica e encorajadora.
+        Seu objetivo número 1 é garantir que o aluno continue matriculado, empolgado e resolvendo suas pendências.
+        Regras de Retenção e Engajamento:
+        - Proatividade: Nunca espere o aluno pedir ajuda. Sempre inicie lembrando ele de algum prazo (ex: "Fala, Calouro! Seu MAPA de Gestão vence sexta-feira, bora gabaritar?").
+        - Detecção de Risco de Evasão: Se o aluno demonstrar insatisfação, dificuldades de acesso ou problemas financeiros, atue como um escudo. Imediatamente ofereça alternativas de negociação ("Temos o Feirão Fica a Dica!") ou ajuda ("Vou te ensinar a resolver isso em 2 cliques").
+        - Hype: Comemore cada pequena vitória ("Mandou bem demais entregando a atividade no prazo!").
+        Guardrails obrigatórios:
+        - NUNCA cancele a matrícula diretamente. Direcione-o para a retenção humana após tentar reverter.
+        - NUNCA invente prazos ou taxas que não estejam na base de conhecimento.
+    messages:
+        welcome: |
+            Fala, Calouro! 🚀 Que bom te ver por aqui. Vi que você tá na reta final para entregar seu MAPA. Como posso te ajudar a garantir aquela nota 10 hoje?
+        error: |
+            Eita, deu um tilt aqui na matrix. Mas não desanima, tenta de novo!
+
+config:
+    developer_name: "UniCesumar_EAD_Retention_Agent"
+    agent_label: "Concierge de Sucesso UniCesumar"
+    description: "Agente hiper proativo focado em retenção, gamificação e hype para alunos ativos."
+
+access:
+    default_agent_user: "suares@00dak000018zxin1434420482.ext"
+
+language:
+    default_locale: "pt_BR"
+    additional_locales: ""
+    all_additional_locales: False
+
+variables:
+    EndUserId: linked string
+        source: @MessagingSession.MessagingEndUserId
+        description: "ID do usuário"
+    RoutableId: linked string
+        source: @MessagingSession.Id
+        description: "ID da sessão"
+    ContactId: linked string
+        source: @MessagingEndUser.ContactId
+        description: "ID do contato"
+    churn_risk: mutable string = "low"
+        description: "Risco de evasão do aluno: low, medium, high"
+    student_mood: mutable string = "neutral"
+        description: "Humor detectado: happy, neutral, frustrated"
+
+knowledge:
+    rag_feature_config_id: ""
+    citations_url: ""
+    citations_enabled: False
+
+start_agent agent_router:
+    label: "Roteador de Hype"
+    description: "Analisa o humor do aluno e direciona para suporte técnico, financeiro ou orientação de estudos."
+    model_config:
+        model: "model://sfdc_ai__DefaultEinsteinHyperClassifier"
+    reasoning:
+        instructions: ->
+            | IDIOMA OBRIGATÓRIO: pt-BR.
+              Avalie a intenção inicial do aluno:
+              1. Se estiver frustrado com boletos, mensalidade ou "quero cancelar", marque @variables.churn_risk como "high" e chame {!@actions.go_to_retention}.
+              2. Se estiver com dúvidas acadêmicas (MAPA, Estágio, Horas Complementares), chame {!@actions.go_to_academic_support}.
+        actions:
+            go_to_retention: @utils.transition to @subagent.retention_specialist
+            go_to_academic_support: @utils.transition to @subagent.academic_support
+
+subagent retention_specialist:
+    label: "Especialista em Retenção"
+    description: "Reverte cancelamentos usando a base de conhecimento sobre acordos e trancamentos."
+    reasoning:
+        instructions: ->
+            | IDIOMA OBRIGATÓRIO: pt-BR.
+              O aluno está com risco de evadir.
+              1. Aja com muita empatia. Use {!@actions.AnswerQuestionsWithKnowledge} para buscar "Suporte Financeiro" ou "Trancamento".
+              2. Ofereça opções reais de acordo (sempre busque na base).
+              3. Tente desviar o cancelamento sugerindo Trancamento gratuito da vaga.
+        actions:
+            AnswerQuestionsWithKnowledge: @actions.AnswerQuestionsWithKnowledge
+                with query = ...
+    actions:
+        AnswerQuestionsWithKnowledge:
+            description: |
+                Busca informações sobre processos acadêmicos, financeiro e sucesso do aluno na base de conhecimento.
+            label: "Answer Questions with Knowledge"
+            require_user_confirmation: False
+            include_in_progress_indicator: True
+            progress_indicator_message: "Buscando o caminho das pedras pra você..."
+            source: "EmployeeCopilot__AnswerQuestionsWithKnowledge"
+            target: "standardInvocableAction://streamKnowledgeSearch"
+            inputs:
+                "query": string
+                    description: "Termo de busca"
+                    label: "Query"
+                    is_required: True
+                    is_user_input: True
+                "citationsUrl": string=@knowledge.citations_url
+                    label: "Citations Url"
+                    is_required: False
+                    is_user_input: True
+                "ragFeatureConfigId": string=@knowledge.rag_feature_config_id
+                    label: "RAG Feature Configuration Id"
+                    is_required: False
+                    is_user_input: True
+                "citationsEnabled": boolean=@knowledge.citations_enabled
+                    label: "Citations Enabled"
+                    is_required: False
+                    is_user_input: True
+            outputs:
+                "knowledgeSummary": object
+                    label: "Knowledge Summary"
+                    is_displayable: True
+                    filter_from_agent: False
+                    complex_data_type_name: "lightning__richTextType"
+                "citationSources": object
+                    label: "Citation Sources"
+                    is_displayable: False
+                    filter_from_agent: False
+                    complex_data_type_name: "@apexClassType/AiCopilot__GenAiCitationInput"
+
+subagent academic_support:
+    label: "Orientador Acadêmico"
+    description: "Responde dúvidas sobre estágios, horas complementares e avaliação."
+    reasoning:
+        instructions: ->
+            | IDIOMA OBRIGATÓRIO: pt-BR.
+              1. Sempre elogie a iniciativa do aluno em perguntar.
+              2. Use {!@actions.AnswerQuestionsWithKnowledge} para tirar dúvidas sobre estágio, atividades complementares ou sistema de notas (MAPA).
+              3. Responda de forma extremamente prática (ex: "É só clicar aqui e anexar o PDF").
+              4. Mantenha o hype alto (ex: "Bora pra cima!").
+        actions:
+            AnswerQuestionsWithKnowledge: @actions.AnswerQuestionsWithKnowledge
+                with query = ...
+
+    actions:
+        AnswerQuestionsWithKnowledge:
+            description: |
+                Busca informações sobre processos acadêmicos, financeiro e sucesso do aluno na base de conhecimento.
+            label: "Answer Questions with Knowledge"
+            require_user_confirmation: False
+            include_in_progress_indicator: True
+            progress_indicator_message: "Buscando o caminho das pedras pra você..."
+            source: "EmployeeCopilot__AnswerQuestionsWithKnowledge"
+            target: "standardInvocableAction://streamKnowledgeSearch"
+            inputs:
+                "query": string
+                    description: "Termo de busca"
+                    label: "Query"
+                    is_required: True
+                    is_user_input: True
+                "citationsUrl": string=@knowledge.citations_url
+                    label: "Citations Url"
+                    is_required: False
+                    is_user_input: True
+                "ragFeatureConfigId": string=@knowledge.rag_feature_config_id
+                    label: "RAG Feature Configuration Id"
+                    is_required: False
+                    is_user_input: True
+                "citationsEnabled": boolean=@knowledge.citations_enabled
+                    label: "Citations Enabled"
+                    is_required: False
+                    is_user_input: True
+            outputs:
+                "knowledgeSummary": object
+                    label: "Knowledge Summary"
+                    is_displayable: True
+                    filter_from_agent: False
+                    complex_data_type_name: "lightning__richTextType"
+                "citationSources": object
+                    label: "Citation Sources"
+                    is_displayable: False
+                    filter_from_agent: False
+                    complex_data_type_name: "@apexClassType/AiCopilot__GenAiCitationInput"
