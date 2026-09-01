@@ -17,3 +17,7 @@ O portal adota uma estratégia **live-first**:
 ## Acessibilidade
 - O portal conta com landmarks básicos, contraste apropriado nos indicadores acadêmicos e feedback em estado hover nos botões primários.
 
+
+## Orientação para avaliação
+
+O modo ao vivo pode levar alguns segundos para iniciar. O indicador de prontidão desaparece automaticamente e também é ocultado quando a janela do chat é aberta. Para reiniciar a sessão, use o menu de três pontos, selecione **Encerrar chat**, feche a janela no **X** e abra novamente o ícone do chat. O modo offline permanece identificado como demonstração determinística.

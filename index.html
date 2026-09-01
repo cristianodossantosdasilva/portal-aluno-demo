@@ -19,6 +19,73 @@
     <!-- Custom CSS -->
     <link rel="preload" as="style" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <style id="agent-evaluator-ux-styles">
+        #agentforce-live-badge {
+            position: fixed;
+            right: 24px;
+            bottom: 96px;
+            z-index: 999;
+            max-width: min(320px, calc(100vw - 32px));
+            padding: 8px 12px;
+            color: #ffffff;
+            background: #0176d3;
+            border-radius: 999px;
+            box-shadow: 0 6px 20px rgba(15, 23, 42, 0.22);
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.25;
+            pointer-events: none;
+        }
+
+        .agent-test-guide {
+            max-width: 760px;
+            margin: 16px auto;
+            padding: 12px 16px;
+            color: #1f2937;
+            background: #f8fafc;
+            border: 1px solid #dbe4ee;
+            border-radius: 12px;
+        }
+
+        .agent-test-guide summary {
+            cursor: pointer;
+            font-weight: 700;
+            color: #1d4ed8;
+        }
+
+        .agent-test-guide__content {
+            padding-top: 12px;
+            line-height: 1.55;
+        }
+
+        .agent-test-guide__content ol {
+            margin: 0;
+            padding-left: 22px;
+        }
+
+        .agent-test-guide__content li {
+            margin-bottom: 8px;
+        }
+
+        .agent-test-guide__content p {
+            margin: 12px 0 0;
+        }
+
+        @media (max-width: 640px) {
+            #agentforce-live-badge {
+                right: 16px;
+                bottom: 88px;
+                max-width: calc(100vw - 32px);
+                font-size: 12px;
+            }
+
+            .agent-test-guide {
+                margin: 12px;
+                padding: 10px 12px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="app-container">
@@ -184,7 +251,18 @@
                     </section>
                 </div>
             </div>
-
+            <details class="agent-test-guide">
+                <summary>Como testar o agente</summary>
+                <div class="agent-test-guide__content">
+                    <ol>
+                        <li>Aguarde o carregamento do chat. Quando a conexão estiver disponível, o portal indicará <strong>Agente ao vivo via Salesforce Agentforce</strong>.</li>
+                        <li>Clique no ícone de chat e envie uma pergunta. A primeira abertura pode levar alguns segundos enquanto o Salesforce inicia a sessão.</li>
+                        <li>Para iniciar uma conversa limpa, abra o menu de três pontos no cabeçalho do chat, selecione <strong>Encerrar chat</strong>, feche a janela no <strong>X</strong> e clique novamente no ícone de chat.</li>
+                        <li>Se aparecer <strong>Modo Offline Demo</strong>, o portal está exibindo uma simulação determinística da experiência, e não uma resposta de IA em tempo real.</li>
+                    </ol>
+                    <p><strong>Dica:</strong> se uma sessão anterior estiver armazenada no navegador, finalize a conversa usando o procedimento acima. Uma janela privativa também pode ser usada para um teste isolado.</p>
+                </div>
+            </details>
             <!-- RODAPÉ -->
             <footer class="footer">
                 <p>Ambiente de demonstração · Hackathon Vitru 2026</p>
@@ -207,15 +285,55 @@
                         scrt2URL: 'https://orgfarm-138e8f6c88-dev-ed.develop.my.salesforce-scrt.com'
                     }
                 );
+                // Indicador de modo ao vivo. Some automaticamente e nunca bloqueia o chat.
+                function hideAgentforceLiveBadge() {
+                    var badge = document.getElementById('agentforce-live-badge');
+                    if (badge) {
+                        badge.style.display = 'none';
+                    }
+                }
 
-                // Rótulo de modo ao vivo — visível somente quando o Agentforce inicializar com sucesso
+                function showAgentforceLiveBadge() {
+                    var badge = document.getElementById('agentforce-live-badge');
+
+                    if (!badge) {
+                        badge = document.createElement('div');
+                        badge.id = 'agentforce-live-badge';
+                        badge.setAttribute('role', 'status');
+                        badge.setAttribute('aria-live', 'polite');
+                        badge.textContent = '⚡ Agente ao vivo via Salesforce Agentforce';
+                        document.body.appendChild(badge);
+                    }
+
+                    badge.style.display = 'block';
+                    window.clearTimeout(window.__agentforceLiveBadgeTimeout);
+                    window.__agentforceLiveBadgeTimeout = window.setTimeout(
+                        hideAgentforceLiveBadge,
+                        5000
+                    );
+                }
+
                 window.addEventListener('onEmbeddedMessagingReady', function() {
-                    var badge = document.createElement('div');
-                    badge.id = 'agentforce-live-badge';
-                    badge.style.cssText = 'position:fixed;bottom:90px;right:20px;background:#0070d2;color:#fff;padding:4px 10px;border-radius:12px;font-size:12px;z-index:9999;pointer-events:none;';
-                    badge.textContent = '⚡ Agente ao vivo via Salesforce Agentforce';
-                    document.body.appendChild(badge);
+                    showAgentforceLiveBadge();
                 });
+
+                // Eventos publicos do Embedded Messaging, quando disponibilizados pelo SDK.
+                window.addEventListener('onEmbeddedMessagingConversationOpened', hideAgentforceLiveBadge);
+                window.addEventListener('onEmbeddedMessagingWindowMaximized', hideAgentforceLiveBadge);
+
+                // Protecao externa: qualquer interacao com launcher/container oculta o indicador.
+                document.addEventListener('click', function(event) {
+                    var target = event.target;
+                    if (!(target instanceof Element)) return;
+
+                    var messagingElement = target.closest(
+                        '[class*="embeddedMessaging"], [id*="embeddedMessaging"], [class*="conversation"]'
+                    );
+
+                    if (messagingElement) {
+                        hideAgentforceLiveBadge();
+                    }
+                }, true);
             } catch (err) {
                 console.error('Error loading Embedded Messaging: ', err);
                 window.__agentforceLoadError = true;
@@ -299,4 +417,3 @@
     <script src="assets/js/script.js"></script>
 </body>
 </html>
-

@@ -62,3 +62,21 @@ A jornada inicial do estudante pode ser consultada no ambiente irmão:
 ## Marcas e uso
 As marcas e os nomes de produtos mencionados pertencem aos respectivos titulares. Este repositório é uma demonstração técnica de portfólio e não representa produto oficial nem implantação produtiva das organizações citadas.
 
+
+## Como avaliar a demonstração
+
+O agente associado a este portal é o **Especialista de Sucesso do Aluno, versão 9**.
+
+O portal tenta carregar primeiro o agente original no Salesforce Agentforce.
+
+1. Aguarde a inicialização do chat.
+2. Quando aparecer **Agente ao vivo via Salesforce Agentforce**, clique no ícone de chat.
+3. Envie uma pergunta ao agente.
+4. Para iniciar uma nova conversa limpa:
+   - abra o menu de três pontos no cabeçalho do chat;
+   - selecione **Encerrar chat**;
+   - feche a janela no **X**;
+   - clique novamente no ícone de chat.
+5. Se aparecer **Modo Offline Demo**, o portal está executando o fallback determinístico. Esse modo demonstra a interface e a jornada, mas não equivale ao runtime do Agentforce nem a uma resposta de IA em tempo real.
+
+A primeira abertura pode levar alguns segundos enquanto o Salesforce inicia a sessão. Caso o navegador mantenha uma conversa anterior, uma janela privativa pode ser usada como alternativa para isolar sessão e cache.
