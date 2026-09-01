@@ -200,13 +200,22 @@
                 embeddedservice_bootstrap.settings.language = 'pt_BR';
 
                 embeddedservice_bootstrap.init(
-                    '00D_REDACTED_DEMO',
+                    '00Dfj00000arKK2',
                     'Vitru_Messaging',
                     'https://orgfarm-138e8f6c88-dev-ed.develop.my.site.com/ESWVitruMessaging1786832319273',
                     {
                         scrt2URL: 'https://orgfarm-138e8f6c88-dev-ed.develop.my.salesforce-scrt.com'
                     }
                 );
+
+                // Rótulo de modo ao vivo — visível somente quando o Agentforce inicializar com sucesso
+                window.addEventListener('onEmbeddedMessagingReady', function() {
+                    var badge = document.createElement('div');
+                    badge.id = 'agentforce-live-badge';
+                    badge.style.cssText = 'position:fixed;bottom:90px;right:20px;background:#0070d2;color:#fff;padding:4px 10px;border-radius:12px;font-size:12px;z-index:9999;pointer-events:none;';
+                    badge.textContent = '⚡ Agente ao vivo via Salesforce Agentforce';
+                    document.body.appendChild(badge);
+                });
             } catch (err) {
                 console.error('Error loading Embedded Messaging: ', err);
                 window.__agentforceLoadError = true;
@@ -290,3 +299,4 @@
     <script src="assets/js/script.js"></script>
 </body>
 </html>
+

@@ -43,7 +43,7 @@ Os metadados exportados, os portais navegáveis e as capturas do Agentforce Buil
 
 A implementação original utiliza uma org temporária do Salesforce Agentforce, ainda acessível no momento da preservação e sujeita a expiração futura.
 
-**Nota técnica:** A substituição proposital do Org ID no código-fonte por medida de segurança impossibilita a conexão direta do widget Embedded Messaging de conectar na Org do Salesforce neste repositório. Por isso, a página adota explicitamente o modo offline/fallback para demonstração visual permanente.
+**Nota técnica:** Enquanto a org temporária estiver ativa, o portal tenta carregar o agente original no Salesforce Agentforce. Se a org estiver indisponível ou expirar, o portal alterna automaticamente para uma simulação determinística claramente identificada como demonstração offline.
 
 ## Arquitetura do Agente
 *(Veja mais em [docs/ARQUITETURA_DO_AGENTE.md](docs/ARQUITETURA_DO_AGENTE.md))*
