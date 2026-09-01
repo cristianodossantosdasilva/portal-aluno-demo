@@ -3,16 +3,24 @@
 ## Resumo Executivo
 Este repositório é um ambiente demonstrativo isolado (público) que documenta e apresenta a interface de frontend projetada para o **Especialista de Sucesso do Aluno UniCesumar (Lisa)**, um agente de IA de permanência criado para o projeto **Marco Zero** durante o Hackathon Vitru 2026.
 
-## Autoria e Metodologia
+## Equipe e Contribuições
+O Marco Zero foi desenvolvido por uma equipe multidisciplinar no Hackathon Vitru 2026. O trabalho reuniu contexto de negócio, análise de dados, modelagem de hipóteses, perspectiva do estudante e implementação técnica assistida por IA. Cristiano Silva foi responsável pela criação e configuração técnica dos dois agentes e pela base de conhecimento no Salesforce Agentforce, apoiado pelas contribuições complementares da equipe descritas nesta documentação.
 
-### Desenvolvimento assistido por IA
-Este agente foi desenvolvido com programação assistida por inteligência artificial, desenvolvimento orientado por intenção e prototipação iterativa, abordagem também conhecida como vibe coding.
+### Integrantes da Equipe
+- **[Yasmin Baltieri](https://www.linkedin.com/in/yasminbaltieri/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3Bb93z3nWqTnGpeUV5z9qLPw%3D%3D)**: Atuou como madrinha do time; trouxe informações sobre o modelo de negócio da Vitru, contexto sobre os dados anonimizados ligados à dor explorada, e participou da leitura e análise dos dados.
+- **[Yasmim Sobrinho](https://www.linkedin.com/in/yasmim-sobrinho-19aa14160/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3Bb93z3nWqTnGpeUV5z9qLPw%3D%3D)**: Apoiou a modelagem dos dados e das hipóteses de evasão, e contribuiu com perspectiva estatística.
+- **[Eduardo Ferreira Mattos](https://www.linkedin.com/in/eduardo-ferreira-mattos/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3Bb93z3nWqTnGpeUV5z9qLPw%3D%3D)**: Apoiou a busca das possíveis causas de evasão e participou ativamente da leitura e análise dos dados junto com a equipe.
+- **[Victoria Suares](https://www.linkedin.com/in/victoria-suares/)**: Trouxe a perspectiva do aluno sobre dificuldades na graduação, no estudo e na permanência, ajudando a moldar os serviços de acolhimento.
+- **[Cristiano Silva](https://github.com/cristianodossantosdasilva)**: Participou da análise dos dados com apoio de ferramentas de IA, identificou possíveis causas de evasão e dores da jornada do aluno, destacou a ausência de onboarding e dificuldades de navegação; além disso, implementou tecnicamente, criando e configurando os dois agentes e a base de conhecimento no Salesforce Agentforce com programação assistida por IA.
 
-Cristiano Silva conduziu a definição do problema, requisitos, jornada do usuário, arquitetura, regras de negócio, guardrails, critérios de validação e ciclos de revisão. As ferramentas de IA apoiaram a geração e revisão de código, estruturação de instruções, diagnóstico de falhas e documentação.
+## Metodologia Assistida por IA
+Este agente foi desenvolvido com programação assistida por inteligência artificial, desenvolvimento orientado por intenção e prototipação iterativa (vibe coding). O processo não consistiu em aceitar automaticamente código gerado. O desenvolvimento ocorreu em ciclos de intenção, geração assistida, revisão, testes, correção e validação humana.
 
-Microsoft Copilot, Antigravity e Gemini faziam parte do ecossistema pessoal de ferramentas pagas por Cristiano. Durante o hackathon, a AWS forneceu o Kiro para apoio ao desenvolvimento, e a Salesforce cedeu o Claude somente para ajustes pontuais. O Salesforce Agentforce foi a plataforma usada para implementar e orquestrar os agentes.
-
-O processo não consistiu em aceitar automaticamente código gerado. O desenvolvimento ocorreu em ciclos de intenção, geração assistida, revisão, testes, correção e validação humana.
+**Origem das ferramentas de IA utilizadas:**
+- **Microsoft Copilot, Antigravity e Gemini:** ferramentas pessoais pagas e utilizadas por Cristiano.
+- **Kiro:** fornecido pela AWS durante o hackathon.
+- **Claude:** cedido pela Salesforce somente para ajustes pontuais.
+- **Salesforce Agentforce:** plataforma de implementação e orquestração dos agentes.
 
 ## Demo Online
 - [Acessar Portal do Aluno (GitHub Pages)](https://cristianodossantosdasilva.github.io/portal-aluno-demo/)
