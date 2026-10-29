@@ -59,8 +59,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const created = await request('/api/sessions', {
                 method: 'POST',
                 body: {
-                    role: AGENT_ROLE,
-                    context: { channel: 'portal-aluno', page: window.location.pathname }
+                    context: {
+                        role: AGENT_ROLE,
+                        channel: 'portal-aluno',
+                        page: window.location.pathname
+                    }
                 }
             });
             sessionId = created.sessionId;
