@@ -550,6 +550,11 @@ body {
     transform: translateY(0);
 }
 
+/* O chat fechado nao pode ocupar 500px e empurrar o card de contexto para fora da tela. */
+.chat-window:not(.active) {
+    display: none;
+}
+
 .chat-header {
     background: linear-gradient(135deg, var(--primary), var(--primary-hover));
     padding: 20px;
