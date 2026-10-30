@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
             appendMessage(text, 'user');
             const result = await request(`/api/sessions/${sessionId}/messages`, {
                 method: 'POST',
-                body: { text }
+                body: { message: text }
             });
             const reply = result.messages?.[0]?.text || 'Não consegui gerar uma resposta agora.';
             appendMessage(reply, 'bot');
