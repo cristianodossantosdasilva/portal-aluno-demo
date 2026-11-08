@@ -1,5 +1,11 @@
 # Changelog - Portal do Aluno Demo
 
+## [v1.4.1] - 2026-11-08
+### Removido
+- `candidato.html`: cópia antiga do portal do candidato, sem link a partir do
+  portal, que ainda carregava o widget Salesforce Embedded Messaging da orgfarm
+  expirada. O portal do candidato oficial está em `portal-do-candidato-demo`.
+
 ## [v1.3] - 2026-08-15
 ### Adicionado
 - Preparação do portal para publicação HTTPS pública (GitHub Pages, Netlify, Vercel).
